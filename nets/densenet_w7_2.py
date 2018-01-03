@@ -90,4 +90,4 @@ def densenet_w7_2(inputs, num_classes=1000, is_training=True,
             end_points['Predictions'] = tf.nn.softmax(logits, name='Predictions')
 
         return logits, end_points
-densenet_w7_2.default_image_size = 32
+densenet_w7_2.default_image_size = 224
