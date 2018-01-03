@@ -69,6 +69,7 @@ def get_preprocessing(name, is_training=False):
       'vgg_16': vgg_preprocessing,
       'vgg_19': vgg_preprocessing,
       'densenet': inception_preprocessing,
+      'densenet_w7_2': inception_preprocessing,
   }
 
   if name not in preprocessing_fn_map:

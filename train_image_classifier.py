@@ -434,6 +434,7 @@ def main(_):
       [image, label] = provider.get(['image', 'label'])
       label -= FLAGS.labels_offset
 
+      print(network_fn.__doc__)
       train_image_size = FLAGS.train_image_size or network_fn.default_image_size
 
       image = image_preprocessing_fn(image, train_image_size, train_image_size)
@@ -455,6 +456,7 @@ def main(_):
       """Allows data parallelism by creating multiple clones of network_fn."""
       images, labels = batch_queue.dequeue()
       logits, end_points = network_fn(images)
+      print('==============shape',images.shape, labels, logits.shape)
 
       #############################
       # Specify the loss function #
