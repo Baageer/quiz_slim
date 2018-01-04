@@ -7,7 +7,7 @@ import tensorflow as tf
 slim = tf.contrib.slim
 
 def densenet_arg_scope(weight_decay=0.0005):
-  """Defines the VGG arg scope.
+  """Defines the densenet arg scope.
 
   Args:
     weight_decay: The l2 regularization coefficient.
@@ -33,8 +33,10 @@ def dense_block(inputs, block_size, k=12, scope=None, reuse=None):
                 last_inputs = inputs
                 scope_name = scope + chr(ord('a') + idx)
                 inputs = slim.conv2d(inputs, k, [1, 1], scope=scope_name)
+                inputs = slim.dropout(inputs, scope=scope + '_dropout_1')
                 scope_name = scope + chr(ord('A') + idx)
                 inputs = slim.conv2d(inputs, k, [3, 3], scope=scope_name)
+                inputs = slim.dropout(inputs, scope=scope + '_dropout_3')
                 inputs = tf.concat([last_inputs, inputs], axis=3)
 
     return inputs

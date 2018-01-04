@@ -47,6 +47,7 @@ if __name__ == '__main__':
                                          'train_dir': FLAGS. train_dir,
                                          'learning_rate': FLAGS.learning_rate, 'optimizer': FLAGS.optimizer,
                                          'batch_size': FLAGS.batch_size, 'max_number_of_steps': steps}))
+        
         for l in p:
             print(p.strip())
 
