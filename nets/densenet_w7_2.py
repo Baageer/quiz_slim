@@ -7,20 +7,21 @@ import tensorflow as tf
 slim = tf.contrib.slim
 
 def densenet_arg_scope(weight_decay=0.0005):
-  """Defines the densenet arg scope.
+    """Defines the densenet arg scope.
 
-  Args:
-    weight_decay: The l2 regularization coefficient.
+    Args:
+      weight_decay: The l2 regularization coefficient.
 
-  Returns:
-    An arg_scope.
-  """
-  with slim.arg_scope([slim.conv2d, slim.fully_connected],
-                      activation_fn=tf.nn.relu,
-                      weights_regularizer=slim.l2_regularizer(weight_decay),
-                      biases_initializer=tf.zeros_initializer()):
-    with slim.arg_scope([slim.conv2d], padding='SAME') as arg_sc:
-      return arg_sc
+    Returns:
+      An arg_scope.
+    """
+    with slim.arg_scope(
+        [slim.conv2d],
+        weights_initializer=tf.contrib.layers.variance_scaling_initializer(
+            factor=2.0, mode='FAN_IN', uniform=False),
+        activation_fn=None, biases_initializer=None, padding='same',
+            stride=1) as sc:
+        return sc
 
 def dense_block(inputs, block_size, k=12, scope=None, reuse=None):
     """Builds dense_block for dense net. """
